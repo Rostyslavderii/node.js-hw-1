@@ -1,0 +1,22 @@
+{
+  "name": "node-lessions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Index.js",
+  "scripts": {
+    "start": "index.js",
+    "start:dev": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "calc-js": "^2.0.7",
+    "commander": "^9.4.1",
+    "express": "^4.18.2",
+    "nanoid": "^4.0.0",
+    "nodemon": "^2.0.20",
+    "yargs": "^17.6.2"
+  }
+}
