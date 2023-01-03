@@ -7,7 +7,7 @@ program
   .option("-e, --email <type>", "user email")
   .option("-p, --phone <type>", "user phone");
 
-program.parse(process.argv);
+program.parse(process.argv);    
 const argv = program.opts();
 
 
@@ -21,23 +21,21 @@ const {
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-          const contacts = await listContacts();
-          console.log(contacts);
+        await listContacts();
       break;
 
     case "get":
-          const getContact = await getContactById(id);
-          console.log(getContact);
+        await getContactById(id);
       break;
 
     case "add":
-          const Contact = await addContact(name, email, phone);
-          console.log(Contact);
+      const contact = await addContact(name, email, phone);
+      console.log(contact);
       break;
 
     case "remove":
-          const contactRem = await removeContact(id);
-          console.log(contactRem);
+      const removes = await removeContact(id);
+      console.table(removes);
       break;
 
     default:

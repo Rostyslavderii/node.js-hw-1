@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "Index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "index.js",
     "start:dev": "node index",
@@ -15,7 +16,7 @@
     "calc-js": "^2.0.7",
     "commander": "^9.4.1",
     "express": "^4.18.2",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.3.4",
     "nodemon": "^2.0.20",
     "yargs": "^17.6.2"
   }

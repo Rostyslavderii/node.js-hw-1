@@ -8,12 +8,10 @@ const contactsPath = path.resolve('./db/contacts.json');
 async function readFile() {
         try {
             const data = await fs.readFile(contactsPath, 'utf8')
-            // console.log(data)
-            // const newContent = `${data} school`
-            // await fs.writeFile(contactsPath, newContent, 'utf8');
+
             const list = JSON.parse(data);
             return list;
-            //await fs.rename('./dateUtils.js', './tmp/NewName.js');
+
         } catch (err) {
             console.error(err)
         }
@@ -27,33 +25,49 @@ async function listContacts() {
 
 async function getContactById(contactId) {
     try {
-        const list = await listContacts();
+
+        const list = await readFile();
         const contact = list.find(({ id }) => id === contactId);
         console.table(contact);
-
+    if (!contact) {
+    return null;
+    }
+        return contact;
     } catch (err) {
         console.error(err)
     }
 }
 
-async function removeContact(contactId) {
-    const list = await listContacts();
-    const newlist = list.filter(({ id }) => id !== contactId);
-    writeFile([...newlist])
+async function writeFile(data) {
+  try {
+    await fs.writeFile(contactsPath, JSON.stringify(data, null, '\t'));
+  } catch (err) {
+    console.error(err);
+  }
 }
+
+
+async function removeContact(contactId) {
+    const list = await readFile();
+    const newlist = await list.filter(({ id }) => id !== contactId);
+    writeFile([...newlist]);
+    return readFile();
+}
+
+
 
 async function addContact(name, email, phone) {
-    const data = await listContacts();
+    const data = await readFile();
 
     const newContact = {
-    id: nanoid(),
-    name,
-    email,
-    phone,
-}
+        id: nanoid(),
+        name,
+        email,
+        phone,
+    };
 
     data.push(newContact);
-    await fs.writeFile(contactsPath, newContent, 'utf8');
+    await writeFile(data);
     return newContact;
 }
 
